@@ -1,0 +1,25 @@
+{
+  "name": "ecomemory-contracts",
+  "version": "1.0.0",
+  "description": "EcoMemory memorial NFT smart contracts for ARC Testnet",
+  "license": "MIT",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "deploy:arc-testnet": "hardhat run scripts/deploy.ts --network arcTestnet",
+    "lint": "solhint 'contracts/**/*.sol' && echo 'No solhint errors'",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
+    "@types/node": "^20.11.0",
+    "hardhat": "^2.22.0",
+    "solhint": "^4.5.0",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2",
+    "dotenv": "^16.4.5"
+  }
+}

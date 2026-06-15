@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@contracts/*": ["./contracts/*"]
+    }
+  },
+  "include": ["./scripts/**/*", "./test/**/*", "./hardhat.config.ts"],
+  "exclude": ["node_modules", "dist"]
+}
