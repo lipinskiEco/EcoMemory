@@ -17,6 +17,14 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-2xl px-6 py-16">
+        <div className="mb-6 text-center">
+          <a
+            href="/deploy"
+            className="inline-block rounded-full border border-stone-300 bg-white px-5 py-2 text-sm font-medium text-stone-700 transition hover:border-eco-400 hover:text-eco-700"
+          >
+            Deploy the contract first
+          </a>
+        </div>
         <MintForm />
 
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
