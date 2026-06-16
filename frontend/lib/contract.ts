@@ -213,28 +213,28 @@ export const ERC20_ABI = [
 
 export const CONTRACT_ADDRESS = (process.env.NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS || '') as `0x${string}`;
 export const USDC_ADDRESS = (process.env.NEXT_PUBLIC_USDC_ADDRESS || '') as `0x${string}`;
-export const ARC_TESTNET_CHAIN_ID = Number(process.env.NEXT_PUBLIC_ARC_TESTNET_CHAIN_ID || 1750);
+export const ARC_TESTNET_CHAIN_ID = Number(process.env.NEXT_PUBLIC_ARC_TESTNET_CHAIN_ID || 5042002);
 
 export const ARC_TESTNET = {
   id: ARC_TESTNET_CHAIN_ID,
   name: 'ARC Testnet',
   nativeCurrency: {
-    name: 'ARC',
-    symbol: 'ARC',
+    name: 'USDC',
+    symbol: 'USDC',
     decimals: 18,
   },
   rpcUrls: {
     default: {
-      http: [process.env.NEXT_PUBLIC_ARC_TESTNET_RPC || 'https://rpc-arc-testnet.example.com'],
+      http: [process.env.NEXT_PUBLIC_ARC_TESTNET_RPC || 'https://rpc.testnet.arc.network'],
     },
     public: {
-      http: [process.env.NEXT_PUBLIC_ARC_TESTNET_RPC || 'https://rpc-arc-testnet.example.com'],
+      http: [process.env.NEXT_PUBLIC_ARC_TESTNET_RPC || 'https://rpc.testnet.arc.network'],
     },
   },
   blockExplorers: {
     default: {
       name: 'ARC Testnet Explorer',
-      url: process.env.NEXT_PUBLIC_ARC_TESTNET_EXPLORER_URL || 'https://explorer-arc-testnet.example.com',
+      url: process.env.NEXT_PUBLIC_ARC_TESTNET_EXPLORER_URL || 'https://testnet.arcscan.app',
     },
   },
 } as const;

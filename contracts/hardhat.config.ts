@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const ARC_TESTNET_RPC = process.env.ARC_TESTNET_RPC || 'https://rpc-arc-testnet.example.com';
+const ARC_TESTNET_RPC = process.env.ARC_TESTNET_RPC || 'https://rpc.testnet.arc.network';
 const PRIVATE_KEY = process.env.PRIVATE_KEY || '';
 
 const config: HardhatUserConfig = {
@@ -25,7 +25,7 @@ const config: HardhatUserConfig = {
     },
     arcTestnet: {
       url: ARC_TESTNET_RPC,
-      chainId: Number(process.env.ARC_TESTNET_CHAIN_ID || 1750),
+      chainId: Number(process.env.ARC_TESTNET_CHAIN_ID || 5042002),
       accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
     },
   },
@@ -36,10 +36,10 @@ const config: HardhatUserConfig = {
     customChains: [
       {
         network: 'arcTestnet',
-        chainId: Number(process.env.ARC_TESTNET_CHAIN_ID || 1750),
+        chainId: Number(process.env.ARC_TESTNET_CHAIN_ID || 5042002),
         urls: {
-          apiURL: process.env.ARC_TESTNET_EXPLORER_API_URL || 'https://explorer-arc-testnet.example.com/api',
-          browserURL: process.env.ARC_TESTNET_EXPLORER_URL || 'https://explorer-arc-testnet.example.com',
+          apiURL: process.env.ARC_TESTNET_EXPLORER_API_URL || 'https://testnet.arcscan.app/api',
+          browserURL: process.env.ARC_TESTNET_EXPLORER_URL || 'https://testnet.arcscan.app',
         },
       },
     ],
