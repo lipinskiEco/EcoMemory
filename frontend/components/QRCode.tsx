@@ -1,9 +1,9 @@
 'use client';
 
-/* eslint-disable @next/next/no-img-element */
-
 import { useEffect, useState } from 'react';
 import QR from 'qrcode';
+
+/* eslint-disable @next/next/no-img-element */
 
 interface QRCodeProps {
   value: string;
@@ -26,7 +26,7 @@ export function QRCode({ value, size = 200, className = '' }: QRCodeProps) {
   if (!dataUrl) {
     return (
       <div
-        className={`flex items-center justify-center rounded-lg bg-white ${className}`}
+        className={`flex items-center justify-center rounded-2xl bg-white shadow-sm ${className}`}
         style={{ width: size, height: size }}
       >
         <span className="text-xs text-stone-400">Loading QR...</span>
@@ -38,7 +38,7 @@ export function QRCode({ value, size = 200, className = '' }: QRCodeProps) {
     <img
       src={dataUrl}
       alt="Memorial QR code"
-      className={`rounded-lg bg-white p-2 shadow-sm ${className}`}
+      className={`rounded-2xl bg-white p-2 shadow-sm ${className}`}
       style={{ width: size, height: size }}
     />
   );

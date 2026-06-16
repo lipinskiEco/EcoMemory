@@ -1,0 +1,15 @@
+node_modules
+.next
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.vercel
+coverage
+frontend/node_modules
+contracts/node_modules
+contracts/artifacts
+contracts/cache
+dist
+.git
