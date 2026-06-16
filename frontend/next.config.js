@@ -20,6 +20,10 @@ const nextConfig = {
         })
       );
     }
+    config.ignoreWarnings = [
+      { module: /@metamask\/sdk/ },
+      { module: /pino/ },
+    ];
     return config;
   },
 };
