@@ -67,8 +67,28 @@ npm run lint
 
 ### 4. Deploy the contract
 
-The contract must be deployed **from your wallet**. The deploy script reads the
-private key from `PRIVATE_KEY` in `contracts/.env`.
+The contract must be deployed **from your wallet**. Choose one of the methods
+below.
+
+#### Browser deployment (recommended)
+
+1. Run the frontend locally:
+
+```bash
+cd frontend
+npm run dev
+```
+
+2. Open `http://localhost:3000/deploy`.
+3. Connect your wallet on ARC Testnet.
+4. Fill in the USDC address, tree fund recipient, and contract owner.
+5. Click **Deploy EcoMemory from wallet** and confirm the transaction.
+6. Copy the deployed contract address into `frontend/.env.local` as
+   `NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS` and restart the dev server.
+
+#### Hardhat deployment
+
+The deploy script reads the private key from `PRIVATE_KEY` in `contracts/.env`.
 
 ```bash
 cd contracts
