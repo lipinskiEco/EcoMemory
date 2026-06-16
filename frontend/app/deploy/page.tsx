@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAccount, useWalletClient, useChainId } from 'wagmi';
+import { useAccount, useWalletClient, useChainId, useSwitchChain } from 'wagmi';
 import { isAddress, zeroAddress } from 'viem';
 import { deployContract } from 'viem/actions';
 import { ECOMEMORY_DEPLOY_ABI, ECOMEMORY_BYTECODE } from '@/lib/contractDeploy';
@@ -12,6 +12,7 @@ export default function DeployPage() {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
   const { data: walletClient } = useWalletClient();
+  const { switchChain } = useSwitchChain();
   const wrongNetwork = isConnected && chainId !== ARC_TESTNET.id;
 
   const [usdc, setUsdc] = useState<string>(USDC_ADDRESS || '');
@@ -89,9 +90,15 @@ export default function DeployPage() {
 
         <div className="rounded-2xl border border-stone-200 bg-white p-8 shadow-sm">
           {wrongNetwork && (
-            <p className="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-700">
-              Please switch your wallet to ARC Testnet (chain ID {ARC_TESTNET.id}).
-            </p>
+            <div className="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-700">
+              <p>Please switch your wallet to ARC Testnet (chain ID {ARC_TESTNET.id}).</p>
+              <button
+                onClick={() => switchChain?.({ chainId: ARC_TESTNET.id })}
+                className="mt-3 rounded-md bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800"
+              >
+                Switch to ARC Testnet
+              </button>
+            </div>
           )}
 
           <div className="space-y-4">
