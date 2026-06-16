@@ -34,8 +34,16 @@ EcoMemory/
 
 - Node.js 20+
 - npm
-- A wallet with ARC Testnet configured and some ARC test gas tokens
-- USDC on ARC Testnet (or the contract address of the test stablecoin)
+- A wallet with ARC Testnet configured and some test USDC for gas
+- USDC on ARC Testnet (faucet: https://faucet.circle.com/)
+
+### ARC Testnet network details
+
+- Chain ID: `5042002`
+- RPC: `https://rpc.testnet.arc.network`
+- Explorer: `https://testnet.arcscan.app`
+- USDC ERC-20: `0x3600000000000000000000000000000000000000` (6 decimals)
+- Gas token: native USDC (18 decimals)
 
 ## Quick start
 
