@@ -6,7 +6,7 @@ import { isAddress, zeroAddress } from 'viem';
 import { deployContract } from 'viem/actions';
 import { ECOMEMORY_DEPLOY_ABI, ECOMEMORY_BYTECODE } from '@/lib/contractDeploy';
 import { ConnectButton } from '@/components/ConnectButton';
-import { ARC_TESTNET } from '@/lib/contract';
+import { ARC_TESTNET, USDC_ADDRESS } from '@/lib/contract';
 
 export default function DeployPage() {
   const { address, isConnected } = useAccount();
@@ -14,24 +14,38 @@ export default function DeployPage() {
   const { data: walletClient } = useWalletClient();
   const wrongNetwork = isConnected && chainId !== ARC_TESTNET.id;
 
-  const [usdc, setUsdc] = useState('');
-  const [treeFund, setTreeFund] = useState('');
-  const [owner, setOwner] = useState('');
+  const [usdc, setUsdc] = useState<string>(USDC_ADDRESS || '');
+  const [treeFund, setTreeFund] = useState<string>('');
+  const [owner, setOwner] = useState<string>('');
   const [deployedAddress, setDeployedAddress] = useState('');
   const [error, setError] = useState('');
   const [isDeploying, setIsDeploying] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (address && !owner) setOwner(address);
     if (address && !treeFund) setTreeFund(address);
   }, [address, owner, treeFund]);
 
+  const copyAddress = () => {
+    if (!deployedAddress) return;
+    navigator.clipboard.writeText(deployedAddress).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   const handleDeploy = async () => {
     setError('');
     setDeployedAddress('');
+    setCopied(false);
 
     if (!walletClient) {
       setError('Wallet not connected');
+      return;
+    }
+    if (wrongNetwork) {
+      setError(`Switch your wallet to ARC Testnet (chain ID ${ARC_TESTNET.id})`);
       return;
     }
     if (!isAddress(usdc) || usdc === zeroAddress) {
@@ -91,7 +105,17 @@ export default function DeployPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-stone-700">Tree fund recipient</label>
+              <div className="flex items-center justify-between">
+                <label className="block text-sm font-medium text-stone-700">Tree fund recipient</label>
+                {address && (
+                  <button
+                    onClick={() => setTreeFund(address)}
+                    className="text-xs text-eco-600 hover:text-eco-800"
+                  >
+                    Use my address
+                  </button>
+                )}
+              </div>
               <input
                 value={treeFund}
                 onChange={(e) => setTreeFund(e.target.value)}
@@ -100,7 +124,17 @@ export default function DeployPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-stone-700">Contract owner</label>
+              <div className="flex items-center justify-between">
+                <label className="block text-sm font-medium text-stone-700">Contract owner</label>
+                {address && (
+                  <button
+                    onClick={() => setOwner(address)}
+                    className="text-xs text-eco-600 hover:text-eco-800"
+                  >
+                    Use my address
+                  </button>
+                )}
+              </div>
               <input
                 value={owner}
                 onChange={(e) => setOwner(e.target.value)}
@@ -115,10 +149,17 @@ export default function DeployPage() {
               <div className="rounded-lg bg-eco-50 p-4 text-sm text-eco-900">
                 <p className="font-medium">Contract deployed successfully</p>
                 <p className="mt-1 break-all font-mono">{deployedAddress}</p>
-                <p className="mt-2 text-xs">
-                  Save this address as NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS in your .env.local
-                  and restart the frontend.
-                </p>
+                <div className="mt-2 flex items-center gap-3">
+                  <button
+                    onClick={copyAddress}
+                    className="rounded-md bg-eco-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-eco-700"
+                  >
+                    {copied ? 'Copied' : 'Copy address'}
+                  </button>
+                  <span className="text-xs text-stone-600">
+                    Save as NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS in .env.local
+                  </span>
+                </div>
               </div>
             )}
 
