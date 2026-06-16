@@ -3,7 +3,6 @@ const webpack = require('webpack');
 
 const nextConfig = {
   reactStrictMode: true,
-  distDir: 'dist',
   images: {
     unoptimized: true,
   },

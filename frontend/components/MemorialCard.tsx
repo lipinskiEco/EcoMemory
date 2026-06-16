@@ -35,8 +35,11 @@ export function MemorialCard({ memorial, tokenId, pageUrl }: MemorialCardProps) 
   }, [memorial.totalDonations]);
 
   return (
-    <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-lg">
-      <div className="bg-eco-800 px-8 py-12 text-center text-white">
+    <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-xl">
+      <div className="bg-gradient-to-br from-eco-800 to-eco-900 px-8 py-14 text-center text-white">
+        <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-3xl backdrop-blur-sm">
+          🌿
+        </div>
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{memorial.name}</h1>
         <p className="mt-3 text-eco-100">
           {memorial.birthDate || '...'} — {memorial.deathDate || '...'}
@@ -51,17 +54,17 @@ export function MemorialCard({ memorial, tokenId, pageUrl }: MemorialCardProps) 
           </div>
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-            <div className="rounded-xl border border-stone-100 p-4 text-center">
+            <div className="rounded-2xl border border-stone-100 p-4 text-center">
               <p className="text-xs uppercase tracking-wide text-stone-500">Donations</p>
               <p className="mt-1 text-xl font-semibold text-eco-700">${formattedDonations}</p>
             </div>
-            <div className="rounded-xl border border-stone-100 p-4 text-center">
+            <div className="rounded-2xl border border-stone-100 p-4 text-center">
               <p className="text-xs uppercase tracking-wide text-stone-500">Created</p>
               <p className="mt-1 text-sm font-medium text-stone-700">
                 {new Date(Number(memorial.createdAt) * 1000).toLocaleDateString()}
               </p>
             </div>
-            <div className="rounded-xl border border-stone-100 p-4 text-center">
+            <div className="rounded-2xl border border-stone-100 p-4 text-center">
               <p className="text-xs uppercase tracking-wide text-stone-500">Token</p>
               <p className="mt-1 text-sm font-medium text-stone-700">#{tokenId}</p>
             </div>

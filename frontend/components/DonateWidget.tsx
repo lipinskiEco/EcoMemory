@@ -10,7 +10,7 @@ import {
 } from 'wagmi';
 import { erc20Abi, parseUnits, isAddress, zeroAddress } from 'viem';
 import { ECOMEMORY_ABI, CONTRACT_ADDRESS, USDC_ADDRESS, ARC_TESTNET } from '@/lib/contract';
-import { ConnectButton } from './ConnectButton';
+import { useTransactions } from '@/components/TransactionProvider';
 
 interface DonateWidgetProps {
   tokenId: string;
@@ -20,6 +20,7 @@ interface DonateWidgetProps {
 export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
+  const { addTransaction, updateTransaction } = useTransactions();
   const wrongNetwork = isConnected && chainId !== ARC_TESTNET.id;
 
   const [amount, setAmount] = useState('0.07');
@@ -64,10 +65,28 @@ export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
   }, [donateError]);
 
   useEffect(() => {
+    if (approveHash) addTransaction({ hash: approveHash, description: 'Approve USDC for donation' });
+  }, [approveHash, addTransaction]);
+
+  useEffect(() => {
+    if (donateHash) {
+      addTransaction({ hash: donateHash, description: 'Donate to EcoMemory memorial' });
+      setSuccess(false);
+    }
+  }, [donateHash, addTransaction]);
+
+  useEffect(() => {
+    if (approveReceipt.isSuccess) updateTransaction(approveHash!, 'success');
+    if (approveReceipt.isError) updateTransaction(approveHash!, 'error');
+  }, [approveReceipt.isSuccess, approveReceipt.isError, approveHash, updateTransaction]);
+
+  useEffect(() => {
     if (donateReceipt.isSuccess) {
+      updateTransaction(donateHash!, 'success');
       setSuccess(true);
     }
-  }, [donateReceipt.isSuccess]);
+    if (donateReceipt.isError) updateTransaction(donateHash!, 'error');
+  }, [donateReceipt.isSuccess, donateReceipt.isError, donateHash, updateTransaction]);
 
   const handleApprove = () => {
     setError('');
@@ -102,20 +121,20 @@ export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
   const needsApproval = !allowance || allowance < amountBigInt;
 
   return (
-    <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-stone-200 bg-white p-8 shadow-sm">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-stone-900">Leave a donation</h2>
-        <ConnectButton />
+    <div className="card mx-auto mt-8 max-w-3xl">
+      <div className="mb-6">
+        <h2 className="text-2xl font-semibold text-stone-900">Leave a donation</h2>
+        <p className="text-sm text-stone-500">Support this memorial and plant trees.</p>
       </div>
 
       {!isConnected && (
-        <p className="rounded-lg bg-stone-100 p-4 text-sm text-stone-600">
+        <p className="rounded-xl bg-stone-100 p-4 text-sm text-stone-600">
           Connect your wallet to send a micro-donation.
         </p>
       )}
 
       {wrongNetwork && (
-        <p className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
+        <p className="rounded-xl bg-red-50 p-4 text-sm text-red-700">
           Please switch your wallet to ARC Testnet (chain ID {ARC_TESTNET.id}).
         </p>
       )}
@@ -131,37 +150,27 @@ export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
               step="0.01"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="w-full rounded-lg border border-stone-300 px-4 py-2 text-sm focus:border-eco-500 focus:outline-none focus:ring-1 focus:ring-eco-500"
+              className="input"
             />
             <span className="text-sm font-medium text-stone-500">USDC</span>
           </div>
-          <p className="mt-1 text-xs text-stone-500">
-            50% goes to the memorial fund, 50% plants trees.
-          </p>
+          <p className="mt-1 text-xs text-stone-500">50% goes to the memorial fund, 50% plants trees.</p>
         </div>
 
-        {error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}
+        {error && <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700">{error}</p>}
         {success && (
-          <p className="rounded-lg bg-eco-50 p-3 text-sm text-eco-800">
+          <p className="rounded-xl bg-eco-50 p-3 text-sm text-eco-800">
             Thank you. Your donation was submitted on-chain.
           </p>
         )}
 
         <div className="flex items-center gap-3">
           {needsApproval && isConnected && !wrongNetwork ? (
-            <button
-              onClick={handleApprove}
-              disabled={isApproving}
-              className="rounded-full bg-stone-800 px-6 py-3 text-sm font-medium text-white transition hover:bg-stone-700 disabled:opacity-60"
-            >
+            <button onClick={handleApprove} disabled={isApproving} className="btn-secondary">
               {isApproving ? 'Approving...' : 'Approve USDC'}
             </button>
           ) : (
-            <button
-              onClick={handleDonate}
-              disabled={!isConnected || wrongNetwork || isDonating}
-              className="rounded-full bg-eco-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-eco-700 disabled:opacity-60"
-            >
+            <button onClick={handleDonate} disabled={!isConnected || wrongNetwork || isDonating} className="btn-primary">
               {isDonating ? 'Sending...' : `Donate $${amount}`}
             </button>
           )}
