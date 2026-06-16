@@ -1,0 +1,17 @@
+{
+  "name": "ecomemory",
+  "version": "1.0.0",
+  "description": "EcoMemory — on-chain memorial NFTs for ARC Testnet",
+  "private": true,
+  "scripts": {
+    "install:all": "cd contracts && npm install && cd ../frontend && npm install",
+    "compile": "cd contracts && npm run compile",
+    "test": "cd contracts && npm run test",
+    "lint": "cd contracts && npm run lint && cd ../frontend && npm run lint",
+    "build": "cd frontend && npm run build",
+    "typecheck": "cd contracts && npm run typecheck && cd ../frontend && npm run typecheck",
+    "dev": "cd frontend && npm run dev",
+    "deploy": "cd contracts && npm run deploy:arc-testnet"
+  },
+  "license": "MIT"
+}
