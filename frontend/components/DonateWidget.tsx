@@ -7,6 +7,7 @@ import {
   useReadContract,
   useWaitForTransactionReceipt,
   useChainId,
+  useSwitchChain,
 } from 'wagmi';
 import { erc20Abi, parseUnits, isAddress, zeroAddress } from 'viem';
 import { TreeDeciduous, Wallet } from 'lucide-react';
@@ -21,6 +22,7 @@ interface DonateWidgetProps {
 export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
+  const { switchChain, isPending: isSwitching } = useSwitchChain();
   const { addTransaction, updateTransaction } = useTransactions();
   const wrongNetwork = isConnected && chainId !== ARC_TESTNET.id;
 
@@ -143,9 +145,13 @@ export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
       )}
 
       {wrongNetwork && (
-        <p className="rounded-none border-2 border-red-100 bg-red-50 p-4 text-sm text-red-700">
-          Please switch your wallet to ARC Testnet (chain ID {ARC_TESTNET.id}).
-        </p>
+        <button
+          onClick={() => switchChain({ chainId: ARC_TESTNET.id })}
+          disabled={isSwitching}
+          className="w-full rounded-none border-2 border-red-200 bg-red-50 p-4 text-left text-sm font-semibold text-red-700 transition hover:bg-red-100 disabled:opacity-50"
+        >
+          {isSwitching ? 'Switching…' : `Switch wallet to ARC Testnet (chain ID ${ARC_TESTNET.id})`}
+        </button>
       )}
 
       <div className="mt-4 space-y-4">
