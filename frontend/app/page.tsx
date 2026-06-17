@@ -1,4 +1,23 @@
 import { MintForm } from '@/components/MintForm';
+import {
+  Leaf,
+  Link2,
+  QrCode,
+  Coins,
+  TreeDeciduous,
+  Heart,
+  Globe,
+  Shield,
+  Wallet,
+} from 'lucide-react';
+
+function IconBox({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-none border-2 border-eco-200 bg-eco-100 text-eco-700">
+      {children}
+    </div>
+  );
+}
 
 export default function HomePage() {
   return (
@@ -24,7 +43,10 @@ export default function HomePage() {
             <a href="#mint" className="btn-primary">
               Mint a memorial
             </a>
-            <a href="#about" className="rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-white/20">
+            <a
+              href="#about"
+              className="rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-white/20"
+            >
               How it works
             </a>
           </div>
@@ -44,7 +66,9 @@ export default function HomePage() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div className="card card-hover">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-eco-100 text-2xl">🌿</div>
+            <IconBox>
+              <Leaf size={22} strokeWidth={2.5} />
+            </IconBox>
             <h3 className="text-lg font-semibold text-stone-900">Eco-friendly tribute</h3>
             <p className="mt-2 text-sm text-stone-600">
               A memorial that gives back: 50% of every donation goes to the memorial
@@ -52,7 +76,9 @@ export default function HomePage() {
             </p>
           </div>
           <div className="card card-hover">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-eco-100 text-2xl">🔗</div>
+            <IconBox>
+              <Link2 size={22} strokeWidth={2.5} />
+            </IconBox>
             <h3 className="text-lg font-semibold text-stone-900">On-chain forever</h3>
             <p className="mt-2 text-sm text-stone-600">
               Names, dates, messages, and donation history are stored permanently on
@@ -60,7 +86,9 @@ export default function HomePage() {
             </p>
           </div>
           <div className="card card-hover">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-eco-100 text-2xl">📱</div>
+            <IconBox>
+              <QrCode size={22} strokeWidth={2.5} />
+            </IconBox>
             <h3 className="text-lg font-semibold text-stone-900">Shareable QR page</h3>
             <p className="mt-2 text-sm text-stone-600">
               Each memorial gets a beautiful page with a QR code. Visitors can view it
@@ -68,7 +96,9 @@ export default function HomePage() {
             </p>
           </div>
           <div className="card card-hover">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-eco-100 text-2xl">⚡</div>
+            <IconBox>
+              <Coins size={22} strokeWidth={2.5} />
+            </IconBox>
             <h3 className="text-lg font-semibold text-stone-900">Micro-donations</h3>
             <p className="mt-2 text-sm text-stone-600">
               Donate as little as $0.05 USDC. Small contributions add up and every
@@ -76,7 +106,9 @@ export default function HomePage() {
             </p>
           </div>
           <div className="card card-hover">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-eco-100 text-2xl">🌳</div>
+            <IconBox>
+              <TreeDeciduous size={22} strokeWidth={2.5} />
+            </IconBox>
             <h3 className="text-lg font-semibold text-stone-900">Transparent split</h3>
             <p className="mt-2 text-sm text-stone-600">
               The smart contract enforces the 50/50 split automatically. No hidden
@@ -84,11 +116,13 @@ export default function HomePage() {
             </p>
           </div>
           <div className="card card-hover">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-eco-100 text-2xl">🤖</div>
-            <h3 className="text-lg font-semibold text-stone-900">AI agent (soon)</h3>
+            <IconBox>
+              <Heart size={22} strokeWidth={2.5} />
+            </IconBox>
+            <h3 className="text-lg font-semibold text-stone-900">Meaningful giving</h3>
             <p className="mt-2 text-sm text-stone-600">
-              An on-chain agent will soon visit memorial pages, leave symbolic
-              micro-donations, and report the health of the fund autonomously.
+              Turn remembrance into real-world impact. Every memorial is a seed for
+              ecological restoration and a lasting legacy.
             </p>
           </div>
         </div>
@@ -121,23 +155,31 @@ export default function HomePage() {
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-2xl border border-eco-100 bg-white p-6 text-center">
-              <div className="mb-3 text-2xl">🌱</div>
+            <div className="card text-center">
+              <div className="mb-3 flex items-center justify-center text-eco-700">
+                <Leaf size={24} strokeWidth={2.5} />
+              </div>
               <h4 className="font-semibold text-stone-900">Low carbon</h4>
               <p className="mt-1 text-sm text-stone-600">Efficient consensus keeps energy use minimal.</p>
             </div>
-            <div className="rounded-2xl border border-eco-100 bg-white p-6 text-center">
-              <div className="mb-3 text-2xl">💸</div>
+            <div className="card text-center">
+              <div className="mb-3 flex items-center justify-center text-eco-700">
+                <Wallet size={24} strokeWidth={2.5} />
+              </div>
               <h4 className="font-semibold text-stone-900">Tiny fees</h4>
               <p className="mt-1 text-sm text-stone-600">Micro-donations only make sense with near-zero fees.</p>
             </div>
-            <div className="rounded-2xl border border-eco-100 bg-white p-6 text-center">
-              <div className="mb-3 text-2xl">🌐</div>
+            <div className="card text-center">
+              <div className="mb-3 flex items-center justify-center text-eco-700">
+                <Globe size={24} strokeWidth={2.5} />
+              </div>
               <h4 className="font-semibold text-stone-900">USDC-native</h4>
               <p className="mt-1 text-sm text-stone-600">ARC uses USDC for gas, making payments familiar.</p>
             </div>
-            <div className="rounded-2xl border border-eco-100 bg-white p-6 text-center">
-              <div className="mb-3 text-2xl">🛡️</div>
+            <div className="card text-center">
+              <div className="mb-3 flex items-center justify-center text-eco-700">
+                <Shield size={24} strokeWidth={2.5} />
+              </div>
               <h4 className="font-semibold text-stone-900">Stable testnet</h4>
               <p className="mt-1 text-sm text-stone-600">ARC Testnet is reliable for real-world dApp demos.</p>
             </div>
@@ -160,19 +202,27 @@ export default function HomePage() {
               <h3 className="text-lg font-semibold text-stone-900">How to mint</h3>
               <ol className="mt-4 space-y-3 text-sm text-stone-600">
                 <li className="flex gap-3">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-eco-100 text-xs font-semibold text-eco-700">1</span>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-none border-2 border-eco-200 bg-eco-100 text-xs font-semibold text-eco-700">
+                    1
+                  </span>
                   Connect your wallet on ARC Testnet.
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-eco-100 text-xs font-semibold text-eco-700">2</span>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-none border-2 border-eco-200 bg-eco-100 text-xs font-semibold text-eco-700">
+                    2
+                  </span>
                   Approve 0.10 USDC for the EcoMemory contract.
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-eco-100 text-xs font-semibold text-eco-700">3</span>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-none border-2 border-eco-200 bg-eco-100 text-xs font-semibold text-eco-700">
+                    3
+                  </span>
                   Fill in name, dates, message, and beneficiary address.
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-eco-100 text-xs font-semibold text-eco-700">4</span>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-none border-2 border-eco-200 bg-eco-100 text-xs font-semibold text-eco-700">
+                    4
+                  </span>
                   Mint and share the QR code page with friends and family.
                 </li>
               </ol>
@@ -180,7 +230,9 @@ export default function HomePage() {
 
             <div className="card border-eco-100 bg-eco-50">
               <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-2xl">💚</div>
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-none border-2 border-eco-200 bg-white text-eco-700">
+                  <Heart size={22} strokeWidth={2.5} />
+                </div>
                 <div>
                   <h3 className="text-lg font-semibold text-stone-900">Every memorial plants trees</h3>
                   <p className="text-sm text-stone-600">
@@ -196,7 +248,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="border-t border-stone-200 bg-white py-12">
+      <footer className="border-t-2 border-stone-200 bg-white py-12">
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
             <div className="text-center sm:text-left">
@@ -204,9 +256,6 @@ export default function HomePage() {
               <p className="text-sm text-stone-500">On-chain memorials that plant trees.</p>
             </div>
             <div className="flex items-center gap-4">
-              <a href="/deploy" className="btn-ghost">
-                Deploy contract
-              </a>
               <a
                 href="https://github.com/lipinskiEco/EcoMemory"
                 target="_blank"

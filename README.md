@@ -56,7 +56,7 @@ EcoMemory/
 ├── contracts/        # Hardhat project
 │   ├── contracts/    # Solidity contracts
 │   ├── test/         # Hardhat tests
-│   └── scripts/      # Deploy scripts
+│   └── scripts/      # Utility scripts
 ├── frontend/         # Next.js app
 │   ├── app/          # Pages
 │   ├── components/   # UI components
@@ -83,88 +83,30 @@ EcoMemory/
 
 ## Quick start
 
-### 1. Install dependencies
-
-```bash
-# Contracts
-cd contracts
-npm install
-
-# Frontend
-cd ../frontend
-npm install
-```
-
-### 2. Configure environment
-
-Copy `.env.example` to `.env` and `.env.local` in both `contracts/` and `frontend/`,
-fill in the ARC Testnet RPC, USDC address, and keys.
-
-### 3. Compile and test the contract
-
-```bash
-cd contracts
-npm run compile
-npm run test
-npm run lint
-```
-
-### 4. Deploy the contract
-
-The contract can be deployed from the browser or via a Hardhat script.
-
-#### Browser deployment (recommended)
-
-1. Run the frontend locally:
+The contract is already deployed on ARC Testnet. To run the frontend locally:
 
 ```bash
 cd frontend
-npm run dev
-```
-
-2. Open `http://localhost:3000/deploy`.
-3. Connect your wallet on ARC Testnet.
-4. Fill in the USDC address, tree fund recipient, and contract owner.
-5. Click **Deploy EcoMemory from wallet** and confirm the transaction.
-6. Copy the deployed contract address into `frontend/.env.local` as
-   `NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS` and restart the dev server.
-
-#### Hardhat deployment
-
-The deploy script reads the private key from `PRIVATE_KEY` in `contracts/.env`.
-
-```bash
-cd contracts
-cp .env.example .env
-# edit .env with your RPC, USDC address, and PRIVATE_KEY
-npx tsx scripts/deploy-viem.ts
-```
-
-After deployment, the script writes the contract address to:
-
-- `contracts/ecomemory-deployment.json`
-- `frontend/.env.local`
-
-### 5. Run the frontend
-
-```bash
-cd frontend
+npm install
 npm run dev
 ```
 
 Open `http://localhost:3000`, connect your wallet on ARC Testnet, and mint a
 memorial.
 
-## Deployment verification
+### Compile and test the contract
 
-After deploying, verify the contract address in `ecomemory-deployment.json` and
-ensure it matches the explorer. The frontend reads the contract address from
-`NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS`.
+```bash
+cd contracts
+npm install
+npm run compile
+npm run test
+npm run lint
+```
 
 ## Important security notes
 
 - Never commit `.env` or private keys.
-- The deploy script only uses the deployer's private key.
 - The contract owner and tree-fund recipient can be configured independently.
 
 ## License
