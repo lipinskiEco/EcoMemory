@@ -33,7 +33,7 @@ export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
   const tokenIdBigInt = BigInt(tokenId);
   const amountBigInt = parseUnits(amount, 6);
 
-  const { data: allowance } = useReadContract({
+  const { data: allowance, refetch: refetchAllowance } = useReadContract({
     address: USDC_ADDRESS,
     abi: erc20Abi,
     functionName: 'allowance',
@@ -79,9 +79,12 @@ export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
   }, [donateHash, addTransaction]);
 
   useEffect(() => {
-    if (approveReceipt.isSuccess) updateTransaction(approveHash!, 'success');
+    if (approveReceipt.isSuccess) {
+      updateTransaction(approveHash!, 'success');
+      refetchAllowance();
+    }
     if (approveReceipt.isError) updateTransaction(approveHash!, 'error');
-  }, [approveReceipt.isSuccess, approveReceipt.isError, approveHash, updateTransaction]);
+  }, [approveReceipt.isSuccess, approveReceipt.isError, approveHash, updateTransaction, refetchAllowance]);
 
   useEffect(() => {
     if (donateReceipt.isSuccess) {

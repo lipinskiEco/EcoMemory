@@ -37,7 +37,7 @@ export function MintForm() {
     query: { enabled: !!CONTRACT_ADDRESS },
   });
 
-  const { data: allowance } = useReadContract({
+  const { data: allowance, refetch: refetchAllowance } = useReadContract({
     address: USDC_ADDRESS,
     abi: erc20Abi,
     functionName: 'allowance',
@@ -99,11 +99,12 @@ export function MintForm() {
   useEffect(() => {
     if (approveReceipt.isSuccess) {
       updateTransaction(approveHash!, 'success');
+      refetchAllowance();
     }
     if (approveReceipt.isError) {
       updateTransaction(approveHash!, 'error');
     }
-  }, [approveReceipt.isSuccess, approveReceipt.isError, approveHash, updateTransaction]);
+  }, [approveReceipt.isSuccess, approveReceipt.isError, approveHash, updateTransaction, refetchAllowance]);
 
   useEffect(() => {
     if (mintReceipt.isSuccess) {
