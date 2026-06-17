@@ -31,9 +31,9 @@ EcoMemory is built on ARC Testnet because it aligns with the project values:
 ## Live demo
 
 - **Frontend:** https://ecomemory-arc.vercel.app
-- **Contract:** `0xc7975277e79bd36eb18bd490d097a6857e130e48`
+- **Contract:** `0xc7975277e79bd36eb18bd490d097a6857e130e48` (verified)
 - **Network:** ARC Testnet (Chain ID 5042002)
-- **Explorer:** https://testnet.arcscan.app
+- **Explorer:** https://testnet.arcscan.app/address/0xc7975277e79bd36eb18bd490d097a6857e130e48#code
 
 ## How it works
 
