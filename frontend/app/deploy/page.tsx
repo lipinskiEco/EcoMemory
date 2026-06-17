@@ -74,7 +74,7 @@ export default function DeployPage() {
       addTransaction({
         hash: contractAddress,
         description: 'Deploy EcoMemory contract',
-        type: 'address',
+        type: 'tx',
       });
       updateTransaction(contractAddress, 'success');
     } catch (err: any) {
@@ -90,16 +90,16 @@ export default function DeployPage() {
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-eco-100 text-3xl">🚀</div>
           <h1 className="text-3xl font-semibold text-stone-900">Deploy EcoMemory</h1>
-          <p className="mt-1 text-stone-600">Deploy the contract from your wallet on ARC Testnet.</p>
+          <p className="mt-1 text-stone-600">Deploy your own EcoMemory contract from your wallet on ARC Testnet.</p>
         </div>
 
-        <div className="card">
+        <div className="card border-eco-100">
           {wrongNetwork && (
-            <div className="mb-6 rounded-xl bg-red-50 p-4 text-sm text-red-700">
+            <div className="mb-6 rounded-2xl bg-red-50 p-4 text-sm text-red-700">
               <p>Please switch your wallet to ARC Testnet (chain ID {ARC_TESTNET.id}).</p>
               <button
                 onClick={() => switchChain?.({ chainId: ARC_TESTNET.id })}
-                className="mt-3 rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800"
+                className="mt-3 rounded-full bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800"
               >
                 Switch to ARC Testnet
               </button>
@@ -115,6 +115,7 @@ export default function DeployPage() {
                 className="input"
                 placeholder="0x..."
               />
+              <p className="mt-1 text-xs text-stone-500">Default is ARC Testnet USDC.</p>
             </div>
             <div>
               <div className="flex items-center justify-between">
@@ -131,6 +132,7 @@ export default function DeployPage() {
                 className="input"
                 placeholder="0x..."
               />
+              <p className="mt-1 text-xs text-stone-500">50% of all donations will be sent here for tree planting.</p>
             </div>
             <div>
               <div className="flex items-center justify-between">
@@ -149,17 +151,17 @@ export default function DeployPage() {
               />
             </div>
 
-            {error && <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700">{error}</p>}
+            {error && <p className="rounded-2xl bg-red-50 p-3 text-sm text-red-700">{error}</p>}
 
             {deployedAddress && (
-              <div className="rounded-xl bg-eco-50 p-4 text-sm text-eco-900">
+              <div className="rounded-2xl bg-eco-50 p-4 text-sm text-eco-900">
                 <p className="font-medium">Contract deployed successfully</p>
                 <p className="mt-1 break-all font-mono">{deployedAddress}</p>
                 <div className="mt-2 flex items-center gap-3">
-                  <button onClick={copyAddress} className="rounded-md bg-eco-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-eco-700">
+                  <button onClick={copyAddress} className="rounded-full bg-eco-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-eco-700">
                     {copied ? 'Copied' : 'Copy address'}
                   </button>
-                  <span className="text-xs text-stone-600">Save as NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS in .env.local</span>
+                  <span className="text-xs text-stone-600">Save as NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS</span>
                 </div>
               </div>
             )}

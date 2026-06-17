@@ -36,7 +36,10 @@ export function MemorialCard({ memorial, tokenId, pageUrl }: MemorialCardProps) 
 
   return (
     <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-xl">
-      <div className="bg-gradient-to-br from-eco-800 to-eco-900 px-8 py-14 text-center text-white">
+      <div className="relative bg-gradient-to-br from-eco-800 to-eco-900 px-8 py-14 text-center text-white leaf-pattern">
+        <div className="absolute left-4 top-4 text-sm font-medium text-eco-100">
+          EcoMemory #{tokenId}
+        </div>
         <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-3xl backdrop-blur-sm">
           🌿
         </div>
@@ -49,7 +52,7 @@ export function MemorialCard({ memorial, tokenId, pageUrl }: MemorialCardProps) 
 
       <div className="grid gap-8 px-8 py-10 md:grid-cols-[1fr_auto]">
         <div className="space-y-6">
-          <div className="rounded-2xl bg-stone-50 p-6">
+          <div className="rounded-2xl border-l-4 border-eco-400 bg-stone-50 p-6">
             <p className="text-lg italic leading-relaxed text-stone-700">“{memorial.message}”</p>
           </div>
 
@@ -72,7 +75,9 @@ export function MemorialCard({ memorial, tokenId, pageUrl }: MemorialCardProps) 
         </div>
 
         <div className="flex flex-col items-center gap-3">
-          <QRCode value={pageUrl} size={180} />
+          <div className="rounded-2xl border border-stone-100 bg-white p-4 shadow-sm">
+            <QRCode value={pageUrl} size={180} />
+          </div>
           <p className="max-w-[180px] text-center text-xs text-stone-500">
             Scan to visit this memorial page.
           </p>

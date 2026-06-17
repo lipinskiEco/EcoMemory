@@ -121,25 +121,42 @@ export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
   const needsApproval = !allowance || allowance < amountBigInt;
 
   return (
-    <div className="card mx-auto mt-8 max-w-3xl">
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold text-stone-900">Leave a donation</h2>
-        <p className="text-sm text-stone-500">Support this memorial and plant trees.</p>
+    <div className="card mx-auto mt-8 max-w-3xl border-eco-100">
+      <div className="mb-6 flex items-center gap-3">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-eco-100 text-2xl">🌳</div>
+        <div>
+          <h2 className="text-2xl font-semibold text-stone-900">Leave a donation</h2>
+          <p className="text-sm text-stone-500">Support this memorial and plant trees.</p>
+        </div>
       </div>
 
       {!isConnected && (
-        <p className="rounded-xl bg-stone-100 p-4 text-sm text-stone-600">
-          Connect your wallet to send a micro-donation.
-        </p>
+        <div className="rounded-2xl bg-stone-100 p-4 text-sm text-stone-600">
+          <div className="flex items-center gap-3">
+            <span className="text-xl">👛</span>
+            <p>Connect your wallet to send a micro-donation.</p>
+          </div>
+        </div>
       )}
 
       {wrongNetwork && (
-        <p className="rounded-xl bg-red-50 p-4 text-sm text-red-700">
+        <p className="rounded-2xl bg-red-50 p-4 text-sm text-red-700">
           Please switch your wallet to ARC Testnet (chain ID {ARC_TESTNET.id}).
         </p>
       )}
 
       <div className="mt-4 space-y-4">
+        <div className="rounded-2xl bg-eco-50 p-4 text-sm text-stone-700">
+          <div className="flex items-center justify-between">
+            <span>50% to memorial</span>
+            <span className="font-semibold text-eco-700">${(parseFloat(amount || '0') / 2).toFixed(2)}</span>
+          </div>
+          <div className="mt-1 flex items-center justify-between">
+            <span>50% to tree fund</span>
+            <span className="font-semibold text-eco-700">${(parseFloat(amount || '0') / 2).toFixed(2)}</span>
+          </div>
+        </div>
+
         <div>
           <label className="block text-sm font-medium text-stone-700">Amount (USDC)</label>
           <div className="mt-1 flex items-center gap-3">
@@ -154,23 +171,23 @@ export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
             />
             <span className="text-sm font-medium text-stone-500">USDC</span>
           </div>
-          <p className="mt-1 text-xs text-stone-500">50% goes to the memorial fund, 50% plants trees.</p>
+          <p className="mt-1 text-xs text-stone-500">Choose between $0.05 and $0.10.</p>
         </div>
 
-        {error && <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700">{error}</p>}
+        {error && <p className="rounded-2xl bg-red-50 p-3 text-sm text-red-700">{error}</p>}
         {success && (
-          <p className="rounded-xl bg-eco-50 p-3 text-sm text-eco-800">
-            Thank you. Your donation was submitted on-chain.
+          <p className="rounded-2xl bg-eco-50 p-3 text-sm text-eco-800">
+            Thank you. Your donation was submitted on-chain and will support this memorial and tree planting.
           </p>
         )}
 
         <div className="flex items-center gap-3">
           {needsApproval && isConnected && !wrongNetwork ? (
-            <button onClick={handleApprove} disabled={isApproving} className="btn-secondary">
+            <button onClick={handleApprove} disabled={isApproving} className="btn-secondary w-full">
               {isApproving ? 'Approving...' : 'Approve USDC'}
             </button>
           ) : (
-            <button onClick={handleDonate} disabled={!isConnected || wrongNetwork || isDonating} className="btn-primary">
+            <button onClick={handleDonate} disabled={!isConnected || wrongNetwork || isDonating} className="btn-primary w-full">
               {isDonating ? 'Sending...' : `Donate $${amount}`}
             </button>
           )}

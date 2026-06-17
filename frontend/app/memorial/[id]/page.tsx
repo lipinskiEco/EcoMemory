@@ -25,7 +25,7 @@ export default function MemorialPage() {
 
   if (isLoading) {
     return (
-      <main className="flex min-h-screen items-center justify-center">
+      <main className="flex min-h-screen items-center justify-center bg-stone-50">
         <div className="text-center">
           <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-eco-200 border-t-eco-600" />
           <p className="text-stone-500">Loading on-chain memorial...</p>
@@ -36,9 +36,9 @@ export default function MemorialPage() {
 
   if (error || !data) {
     return (
-      <main className="flex min-h-screen items-center justify-center px-6">
+      <main className="flex min-h-screen items-center justify-center bg-stone-50 px-6">
         <div className="text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-stone-100 text-3xl">🍃</div>
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-eco-100 text-3xl">🍃</div>
           <h1 className="text-2xl font-semibold text-stone-900">Memorial not found</h1>
           <p className="mt-2 text-stone-600">This memorial does not exist on the contract yet.</p>
           <a href="/" className="mt-6 inline-block btn-primary">
@@ -61,7 +61,7 @@ export default function MemorialPage() {
   };
 
   return (
-    <main className="min-h-screen bg-stone-50 py-12 px-6">
+    <main className="min-h-screen bg-stone-50 py-12 px-6 leaf-pattern">
       <MemorialCard memorial={memorial} tokenId={tokenId} pageUrl={pageUrl} />
       <DonateWidget tokenId={tokenId} beneficiary={memorial.beneficiary} />
 
