@@ -74,6 +74,7 @@ export default function DeployPage() {
       addTransaction({
         hash: contractAddress,
         description: 'Deploy EcoMemory contract',
+        type: 'address',
       });
       updateTransaction(contractAddress, 'success');
     } catch (err: any) {

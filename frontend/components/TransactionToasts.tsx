@@ -11,7 +11,8 @@ export function TransactionToasts() {
   return (
     <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-3">
       {transactions.map((tx) => {
-        const explorerUrl = tx.explorerUrl || `${ARC_TESTNET.blockExplorers.default.url}/tx/${tx.hash}`;
+        const base = ARC_TESTNET.blockExplorers.default.url;
+        const explorerUrl = tx.explorerUrl || `${base}/${tx.type === 'address' ? 'address' : 'tx'}/${tx.hash}`;
         const statusColor =
           tx.status === 'success' ? 'border-eco-500 bg-eco-50' : tx.status === 'error' ? 'border-red-400 bg-red-50' : 'border-stone-300 bg-white';
         const statusIcon = tx.status === 'success' ? '✓' : tx.status === 'error' ? '✕' : '●';

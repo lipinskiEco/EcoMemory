@@ -8,11 +8,12 @@ export interface Transaction {
   description: string;
   status: 'pending' | 'success' | 'error';
   explorerUrl?: string;
+  type?: 'tx' | 'address';
 }
 
 interface TransactionContextValue {
   transactions: Transaction[];
-  addTransaction: (tx: Omit<Transaction, 'id' | 'status'>) => void;
+  addTransaction: (tx: Omit<Transaction, 'id' | 'status'>) => Transaction;
   updateTransaction: (hash: `0x${string}`, status: Transaction['status']) => void;
   removeTransaction: (id: string) => void;
 }
@@ -24,10 +25,9 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
 
   const addTransaction = useCallback((tx: Omit<Transaction, 'id' | 'status'>) => {
     const id = `${tx.hash}-${Date.now()}`;
-    setTransactions((prev) => [
-      ...prev,
-      { ...tx, id, status: 'pending' },
-    ]);
+    const item = { ...tx, id, status: 'pending' as const };
+    setTransactions((prev) => [...prev, item]);
+    return item;
   }, []);
 
   const updateTransaction = useCallback((hash: `0x${string}`, status: Transaction['status']) => {
