@@ -9,6 +9,7 @@ import {
   useChainId,
 } from 'wagmi';
 import { erc20Abi, parseUnits, isAddress, zeroAddress } from 'viem';
+import { TreeDeciduous, Wallet } from 'lucide-react';
 import { ECOMEMORY_ABI, CONTRACT_ADDRESS, USDC_ADDRESS, ARC_TESTNET } from '@/lib/contract';
 import { useTransactions } from '@/components/TransactionProvider';
 
@@ -123,7 +124,9 @@ export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
   return (
     <div className="card mx-auto mt-8 max-w-3xl border-eco-100">
       <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-eco-100 text-2xl">🌳</div>
+        <div className="flex h-12 w-12 items-center justify-center rounded-none border-2 border-eco-200 bg-eco-100 text-eco-700">
+          <TreeDeciduous size={22} strokeWidth={2.5} />
+        </div>
         <div>
           <h2 className="text-2xl font-semibold text-stone-900">Leave a donation</h2>
           <p className="text-sm text-stone-500">Support this memorial and plant trees.</p>
@@ -131,22 +134,22 @@ export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
       </div>
 
       {!isConnected && (
-        <div className="rounded-2xl bg-stone-100 p-4 text-sm text-stone-600">
+        <div className="rounded-none border-2 border-stone-200 bg-stone-100 p-4 text-sm text-stone-600">
           <div className="flex items-center gap-3">
-            <span className="text-xl">👛</span>
+            <Wallet size={20} strokeWidth={2.5} className="text-stone-500" />
             <p>Connect your wallet to send a micro-donation.</p>
           </div>
         </div>
       )}
 
       {wrongNetwork && (
-        <p className="rounded-2xl bg-red-50 p-4 text-sm text-red-700">
+        <p className="rounded-none border-2 border-red-100 bg-red-50 p-4 text-sm text-red-700">
           Please switch your wallet to ARC Testnet (chain ID {ARC_TESTNET.id}).
         </p>
       )}
 
       <div className="mt-4 space-y-4">
-        <div className="rounded-2xl bg-eco-50 p-4 text-sm text-stone-700">
+        <div className="rounded-none border-2 border-eco-100 bg-eco-50 p-4 text-sm text-stone-700">
           <div className="flex items-center justify-between">
             <span>50% to memorial</span>
             <span className="font-semibold text-eco-700">${(parseFloat(amount || '0') / 2).toFixed(2)}</span>
@@ -174,9 +177,9 @@ export function DonateWidget({ tokenId, beneficiary }: DonateWidgetProps) {
           <p className="mt-1 text-xs text-stone-500">Choose between $0.05 and $0.10.</p>
         </div>
 
-        {error && <p className="rounded-2xl bg-red-50 p-3 text-sm text-red-700">{error}</p>}
+        {error && <p className="rounded-none border-2 border-red-100 bg-red-50 p-3 text-sm text-red-700">{error}</p>}
         {success && (
-          <p className="rounded-2xl bg-eco-50 p-3 text-sm text-eco-800">
+          <p className="rounded-none border-2 border-eco-100 bg-eco-50 p-3 text-sm text-eco-800">
             Thank you. Your donation was submitted on-chain and will support this memorial and tree planting.
           </p>
         )}

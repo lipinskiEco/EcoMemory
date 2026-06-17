@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
+import { Leaf } from 'lucide-react';
 import { QRCode } from './QRCode';
 
 export interface MemorialData {
@@ -35,13 +36,13 @@ export function MemorialCard({ memorial, tokenId, pageUrl }: MemorialCardProps) 
   }, [memorial.totalDonations]);
 
   return (
-    <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-xl">
+    <div className="mx-auto max-w-3xl overflow-hidden border-2 border-stone-200 bg-white shadow-xl">
       <div className="relative bg-gradient-to-br from-eco-800 to-eco-900 px-8 py-14 text-center text-white leaf-pattern">
         <div className="absolute left-4 top-4 text-sm font-medium text-eco-100">
           EcoMemory #{tokenId}
         </div>
-        <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-3xl backdrop-blur-sm">
-          🌿
+        <div className="mb-4 inline-flex h-16 w-16 items-center justify-center border-2 border-white/20 bg-white/10 text-eco-100 backdrop-blur-sm">
+          <Leaf size={28} strokeWidth={2} />
         </div>
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{memorial.name}</h1>
         <p className="mt-3 text-eco-100">
@@ -52,22 +53,22 @@ export function MemorialCard({ memorial, tokenId, pageUrl }: MemorialCardProps) 
 
       <div className="grid gap-8 px-8 py-10 md:grid-cols-[1fr_auto]">
         <div className="space-y-6">
-          <div className="rounded-2xl border-l-4 border-eco-400 bg-stone-50 p-6">
+          <div className="border-l-4 border-eco-400 bg-stone-50 p-6">
             <p className="text-lg italic leading-relaxed text-stone-700">“{memorial.message}”</p>
           </div>
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-stone-100 p-4 text-center">
+            <div className="border-2 border-stone-100 p-4 text-center">
               <p className="text-xs uppercase tracking-wide text-stone-500">Donations</p>
               <p className="mt-1 text-xl font-semibold text-eco-700">${formattedDonations}</p>
             </div>
-            <div className="rounded-2xl border border-stone-100 p-4 text-center">
+            <div className="border-2 border-stone-100 p-4 text-center">
               <p className="text-xs uppercase tracking-wide text-stone-500">Created</p>
               <p className="mt-1 text-sm font-medium text-stone-700">
                 {new Date(Number(memorial.createdAt) * 1000).toLocaleDateString()}
               </p>
             </div>
-            <div className="rounded-2xl border border-stone-100 p-4 text-center">
+            <div className="border-2 border-stone-100 p-4 text-center">
               <p className="text-xs uppercase tracking-wide text-stone-500">Token</p>
               <p className="mt-1 text-sm font-medium text-stone-700">#{tokenId}</p>
             </div>
@@ -75,7 +76,7 @@ export function MemorialCard({ memorial, tokenId, pageUrl }: MemorialCardProps) 
         </div>
 
         <div className="flex flex-col items-center gap-3">
-          <div className="rounded-2xl border border-stone-100 bg-white p-4 shadow-sm">
+          <div className="border-2 border-stone-100 bg-white p-4 shadow-sm">
             <QRCode value={pageUrl} size={180} />
           </div>
           <p className="max-w-[180px] text-center text-xs text-stone-500">
