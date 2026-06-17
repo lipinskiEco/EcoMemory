@@ -3,20 +3,20 @@ import { MintForm } from '@/components/MintForm';
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <section className="relative overflow-hidden gradient-eco py-24 text-white leaf-pattern">
-        <div className="absolute inset-0 opacity-20">
+      <section className="relative overflow-hidden hero-bg py-24 text-white">
+        <div className="absolute inset-0 opacity-30">
           <div className="absolute -left-20 -top-20 h-96 w-96 animate-float rounded-full bg-eco-400 blur-3xl" />
           <div className="absolute bottom-0 right-0 h-96 w-96 animate-pulse-slow rounded-full bg-emerald-300 blur-3xl" />
         </div>
         <div className="relative mx-auto max-w-5xl px-6 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium backdrop-blur-sm">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white shadow-sm backdrop-blur-sm">
             <span className="inline-block h-2 w-2 rounded-full bg-eco-300" />
-            Living memories on ARC Testnet
+            Built on ARC Testnet — USDC-native, low fees, eco-friendly
           </div>
-          <h1 className="text-balance text-5xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="text-balance text-5xl font-semibold tracking-tight text-white drop-shadow-sm sm:text-6xl lg:text-7xl">
             Honor a life. Plant a future.
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-xl text-eco-100">
+          <p className="mx-auto mt-6 max-w-2xl text-xl text-white/90">
             EcoMemory turns personal memorials into living digital gardens. Each NFT
             funds remembrance and tree planting — transparently, on-chain.
           </p>
@@ -24,7 +24,7 @@ export default function HomePage() {
             <a href="#mint" className="btn-primary">
               Mint a memorial
             </a>
-            <a href="#about" className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+            <a href="#about" className="rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-white/20">
               How it works
             </a>
           </div>
