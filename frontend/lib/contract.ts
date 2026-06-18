@@ -213,6 +213,7 @@ export const ERC20_ABI = [
 
 export const CONTRACT_ADDRESS = (process.env.NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS || '') as `0x${string}`;
 export const USDC_ADDRESS = (process.env.NEXT_PUBLIC_USDC_ADDRESS || '') as `0x${string}`;
+export const CONTRACT_ADDRESS_CONFIGURED = CONTRACT_ADDRESS.length > 0 && CONTRACT_ADDRESS.startsWith('0x');
 export const ARC_TESTNET_CHAIN_ID = Number(process.env.NEXT_PUBLIC_ARC_TESTNET_CHAIN_ID || 5042002);
 
 export const ARC_TESTNET = {

@@ -1,4 +1,5 @@
 import { MintForm } from '@/components/MintForm';
+import { CONTRACT_ADDRESS_CONFIGURED } from '@/lib/contract';
 import {
   Leaf,
   Link2,
@@ -22,6 +23,15 @@ function IconBox({ children }: { children: React.ReactNode }) {
 export default function HomePage() {
   return (
     <main className="min-h-screen">
+      {!CONTRACT_ADDRESS_CONFIGURED && (
+        <div className="border-b-2 border-amber-200 bg-amber-50 px-6 py-3 text-center text-sm text-amber-800">
+          <span className="font-semibold">Contract address not configured.</span>{' '}
+          Deploy EcoMemory from your wallet, then set
+          <code className="mx-1 rounded bg-amber-100 px-1 font-mono">NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS</code>
+          in your environment.
+        </div>
+      )}
+
       <section className="relative overflow-hidden hero-bg py-24 text-white">
         <div className="absolute inset-0 opacity-30">
           <div className="absolute -left-20 -top-20 h-96 w-96 animate-float rounded-full bg-eco-400 blur-3xl" />

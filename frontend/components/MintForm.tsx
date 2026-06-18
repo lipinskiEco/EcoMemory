@@ -11,7 +11,7 @@ import {
 } from 'wagmi';
 import { erc20Abi, isAddress, zeroAddress } from 'viem';
 import { Sprout, Wallet } from 'lucide-react';
-import { ECOMEMORY_ABI, CONTRACT_ADDRESS, USDC_ADDRESS, ARC_TESTNET } from '@/lib/contract';
+import { ECOMEMORY_ABI, CONTRACT_ADDRESS, CONTRACT_ADDRESS_CONFIGURED, USDC_ADDRESS, ARC_TESTNET } from '@/lib/contract';
 import { useTransactions } from '@/components/TransactionProvider';
 
 export function MintForm() {
@@ -160,6 +160,17 @@ export function MintForm() {
           <p className="text-sm text-stone-500">Cost: {mintPrice ? '0.10 USDC' : 'loading...'}</p>
         </div>
       </div>
+
+      {!CONTRACT_ADDRESS_CONFIGURED && (
+        <div className="rounded-none border-2 border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+          <p className="font-semibold">Contract address not configured</p>
+          <p className="mt-1">
+            Deploy the EcoMemory contract from your wallet, then set
+            <code className="mx-1 rounded bg-amber-100 px-1 font-mono">NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS</code>
+            in your environment and restart.
+          </p>
+        </div>
+      )}
 
       {!isConnected && (
         <div className="rounded-none border-2 border-stone-200 bg-stone-100 p-4 text-sm text-stone-600">

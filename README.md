@@ -31,9 +31,10 @@ EcoMemory is built on ARC Testnet because it aligns with the project values:
 ## Live demo
 
 - **Frontend:** https://ecomemory-arc.vercel.app
-- **Contract:** `0xc7975277e79bd36eb18bd490d097a6857e130e48` (verified)
 - **Network:** ARC Testnet (Chain ID 5042002)
-- **Explorer:** https://testnet.arcscan.app/address/0xc7975277e79bd36eb18bd490d097a6857e130e48#code
+- **Explorer:** https://testnet.arcscan.app
+
+> The frontend requires a manually deployed EcoMemory contract. See the deployment section below to deploy your own contract from your wallet and set the address in your environment.
 
 ## How it works
 
@@ -83,7 +84,32 @@ EcoMemory/
 
 ## Quick start
 
-The contract is already deployed on ARC Testnet. To run the frontend locally:
+### 1. Compile and test the contract
+
+```bash
+cd contracts
+npm install
+cp .env.example .env
+# edit .env with your ARC Testnet RPC, USDC address, and wallet details
+npm run compile
+npm run test
+npm run lint
+```
+
+### 2. Deploy the contract manually
+
+Deploy from your own wallet using the Hardhat script:
+
+```bash
+cd contracts
+# Make sure .env contains your PRIVATE_KEY, CONTRACT_OWNER, and TREE_FUND_RECIPIENT
+npx tsx scripts/deploy-viem.ts
+```
+
+The script will write the deployed address to `frontend/.env.local` as
+`NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS`.
+
+### 3. Run the frontend
 
 ```bash
 cd frontend
@@ -94,19 +120,15 @@ npm run dev
 Open `http://localhost:3000`, connect your wallet on ARC Testnet, and mint a
 memorial.
 
-### Compile and test the contract
+### 4. Deploy to Vercel
 
-```bash
-cd contracts
-npm install
-npm run compile
-npm run test
-npm run lint
-```
+Set the environment variable `NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS` to your
+deployed contract address in the Vercel dashboard.
 
 ## Important security notes
 
-- Never commit `.env` or private keys.
+- Never commit `.env`, `.env.local`, or private keys.
+- Only deploy the contract from a wallet you control.
 - The contract owner and tree-fund recipient can be configured independently.
 
 ## License
