@@ -96,18 +96,9 @@ npm run test
 npm run lint
 ```
 
-### 2. Deploy the contract manually
+.### 2. Deploy the contract manually
 
-Deploy from your own wallet using the Hardhat script:
-
-```bash
-cd contracts
-# Make sure .env contains your PRIVATE_KEY, CONTRACT_OWNER, and TREE_FUND_RECIPIENT
-npx tsx scripts/deploy-viem.ts
-```
-
-The script will write the deployed address to `frontend/.env.local` as
-`NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS`.
+See the step-by-step guide in **[DEPLOY.md](./DEPLOY.md)**.
 
 ### 3. Run the frontend
 
