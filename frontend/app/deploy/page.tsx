@@ -70,18 +70,19 @@ export default function DeployPage() {
   };
 
   return (
-    <main className="min-h-screen bg-stone-50 px-6 py-12">
+    <main className="min-h-screen bg-ivory px-6 py-14">
       <div className="mx-auto max-w-2xl">
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-semibold text-stone-900">Deploy EcoMemory</h1>
-          <p className="mt-2 text-stone-600">
+        <div className="mb-10 text-center">
+          <p className="text-xs uppercase tracking-widest2 text-eco-700">Deployment</p>
+          <h1 className="mt-3 font-display text-3xl font-medium tracking-wide text-ink">Deploy EcoMemory</h1>
+          <p className="mt-3 font-serif text-ink/65">
             Deploy your own EcoMemory contract from your wallet on ARC Testnet.
           </p>
         </div>
 
-        <div className="card border-eco-100">
+        <div className="card">
           {!isConnected && (
-            <div className="mb-6 rounded-none border-2 border-stone-200 bg-stone-100 p-4 text-sm text-stone-600">
+            <div className="mb-6 rounded-2xl border border-ink/10 bg-cream/70 p-4 text-sm text-ink/65">
               Connect your wallet on ARC Testnet to deploy.
             </div>
           )}
@@ -90,7 +91,7 @@ export default function DeployPage() {
             <button
               onClick={() => switchChain({ chainId: ARC_TESTNET.id })}
               disabled={isSwitching}
-              className="mb-6 w-full rounded-none border-2 border-red-200 bg-red-50 p-4 text-left text-sm font-semibold text-red-700 transition hover:bg-red-100 disabled:opacity-50"
+              className="mb-6 w-full rounded-2xl border border-red-300/60 bg-red-50 p-4 text-left text-sm font-medium text-red-700 transition hover:bg-red-100 disabled:opacity-50"
             >
               {isSwitching ? 'Switching...' : 'Switch to ARC Testnet (chain ID ' + ARC_TESTNET.id + ')'}
             </button>
@@ -98,44 +99,44 @@ export default function DeployPage() {
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-stone-700">USDC token address</label>
+              <label className="block text-xs uppercase tracking-widest2 text-ink/55">USDC token address</label>
               <input
                 value={paymentToken}
                 onChange={(e) => setPaymentToken(e.target.value)}
-                className="input"
+                className="input mt-1.5"
                 placeholder="0x..."
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-stone-700">Tree fund recipient</label>
+              <label className="block text-xs uppercase tracking-widest2 text-ink/55">Tree fund recipient</label>
               <input
                 value={treeFundRecipient}
                 onChange={(e) => setTreeFundRecipient(e.target.value)}
-                className="input"
+                className="input mt-1.5"
                 placeholder="0x..."
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-stone-700">Contract owner</label>
+              <label className="block text-xs uppercase tracking-widest2 text-ink/55">Contract owner</label>
               <input
                 value={owner}
                 onChange={(e) => setOwner(e.target.value)}
-                className="input"
+                className="input mt-1.5"
                 placeholder="0x..."
               />
             </div>
 
             {error && (
-              <p className="rounded-none border-2 border-red-100 bg-red-50 p-3 text-sm text-red-700">{error}</p>
+              <p className="rounded-2xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>
             )}
 
             {deployedAddress && (
-              <div className="rounded-none border-2 border-eco-100 bg-eco-50 p-4">
-                <p className="font-semibold text-stone-900">Contract deployed</p>
-                <p className="mt-1 break-all font-mono text-sm text-stone-700">{deployedAddress}</p>
+              <div className="rounded-2xl border border-eco-300/60 bg-eco-100/60 p-4">
+                <p className="font-medium text-ink">Contract deployed</p>
+                <p className="mt-1 break-all font-mono text-sm text-ink/75">{deployedAddress}</p>
                 <button
                   onClick={handleCopy}
-                  className="mt-3 rounded-none border-2 border-eco-300 bg-white px-4 py-2 text-sm font-semibold text-eco-700 transition hover:bg-eco-50"
+                  className="mt-3 rounded-full border border-eco-700/40 bg-cream px-5 py-2 text-sm font-medium text-eco-800 transition hover:bg-eco-100/60"
                 >
                   Copy address
                 </button>
@@ -153,7 +154,7 @@ export default function DeployPage() {
         </div>
 
         <div className="mt-8 text-center">
-          <a href="/" className="text-sm text-stone-500 hover:text-stone-800">
+          <a href="/" className="text-xs uppercase tracking-widest2 text-ink/50 transition hover:text-ink">
             &larr; Back to EcoMemory
           </a>
         </div>

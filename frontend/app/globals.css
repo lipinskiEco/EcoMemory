@@ -3,64 +3,153 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 28, 25, 23;
-  --background-rgb: 250, 250, 249;
+  /* Warm editorial palette (TERRAIN). */
+  --foreground-rgb: 35, 32, 27;      /* ink */
+  --background-rgb: 244, 241, 234;   /* ivory */
+
+  /* Botanical green scale used by the hero / accents. */
+  --sage: #7c9673;
+  --forest: #364c30;
+  --deep-forest: #1e2b1c;
+
+  /* OPTIONAL real hero photo:
+     Drop a file at public/hero.jpg and the hero will use it automatically
+     (the CSS gradient below stays as a graceful fallback). You can also
+     override the image at runtime via:  style="--hero-image: url(/my.jpg)" */
+  --hero-image: url('/hero.jpg');
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 @layer components {
+  /* Warm translucent card with hairline border + soft shadow. */
   .card {
-    @apply rounded-none border-2 border-stone-200 bg-white p-8 shadow-sm;
+    @apply rounded-3xl border border-ink/10 bg-cream/80 p-8 shadow-card backdrop-blur-sm;
   }
 
   .card-hover {
-    @apply transition hover:-translate-y-0.5 hover:border-eco-300 hover:shadow-md;
+    @apply transition duration-300 hover:-translate-y-1 hover:border-eco-300/70 hover:shadow-soft;
   }
 
+  /* Forest pill button. */
   .btn-primary {
-    @apply rounded-none bg-gradient-to-r from-eco-700 to-eco-500 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-eco-200 transition hover:from-eco-800 hover:to-eco-600 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center rounded-full bg-eco-800 px-7 py-3 text-sm font-medium tracking-wide text-ivory shadow-soft transition duration-300 hover:bg-eco-900 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0;
   }
 
+  /* Outline pill button. */
   .btn-secondary {
-    @apply rounded-none border-2 border-stone-300 bg-white px-6 py-3 text-sm font-semibold text-stone-700 transition hover:border-eco-400 hover:text-eco-700 disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-full border border-eco-700/40 bg-transparent px-7 py-3 text-sm font-medium tracking-wide text-eco-800 transition duration-300 hover:border-eco-700 hover:bg-eco-700/5 hover:-translate-y-0.5 disabled:opacity-50;
   }
 
   .btn-ghost {
-    @apply rounded-none px-5 py-2.5 text-sm font-medium text-stone-600 transition hover:bg-stone-100 hover:text-stone-900;
+    @apply rounded-full px-5 py-2.5 text-sm font-medium tracking-wide text-ink/70 transition hover:bg-ink/5 hover:text-ink;
   }
 
+  /* Soft rounded input. */
   .input {
-    @apply w-full rounded-none border-2 border-stone-300 bg-white px-4 py-2.5 text-sm transition focus:border-eco-500 focus:outline-none focus:ring-2 focus:ring-eco-100;
+    @apply w-full rounded-2xl border border-ink/15 bg-cream/70 px-4 py-3 text-sm text-ink transition placeholder:text-ink/35 focus:border-eco-600 focus:outline-none focus:ring-2 focus:ring-eco-200/60;
   }
 
+  /* Serif section heading + subhead. */
   .section-title {
-    @apply text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl;
+    @apply font-display text-3xl font-medium tracking-wide text-ink sm:text-4xl;
   }
 
   .section-subtitle {
-    @apply mx-auto mt-4 max-w-2xl text-lg text-stone-600;
+    @apply mx-auto mt-4 max-w-2xl font-serif text-lg leading-relaxed text-ink/70;
   }
 
-  .gradient-eco {
-    @apply bg-gradient-to-br from-eco-900 via-eco-800 to-stone-900;
+  /* Small uppercase letter-spaced status / label pill. */
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-ink/15 bg-cream/70 px-4 py-1.5 text-[0.7rem] font-medium uppercase tracking-widest2 text-ink/70 backdrop-blur-sm;
+  }
+
+  /* ---- HERO BACKGROUND ----------------------------------------------
+     Layered, dawn-lit forest gradient + soft warm light. A real photo
+     can be dropped at public/hero.jpg (see :root --hero-image); when the
+     file is missing the browser simply falls back to the gradient below. */
+  .hero-bg {
+    background-color: var(--deep-forest);
+    background-image:
+      radial-gradient(120% 90% at 50% 110%, rgba(124, 150, 115, 0.55) 0%, transparent 55%),
+      radial-gradient(80% 60% at 78% 18%, rgba(245, 232, 205, 0.32) 0%, transparent 60%),
+      linear-gradient(180deg, #1e2b1c 0%, #2a3a24 38%, #364c30 70%, #4a6240 100%);
+  }
+
+  /* Optional real-photo layer (graceful fallback to the gradient above). */
+  .hero-photo {
+    background-image: var(--hero-image);
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Slow-drifting warm light glow over the hero. */
+  .hero-light {
+    background:
+      radial-gradient(50% 55% at 50% 30%, rgba(248, 236, 208, 0.45) 0%, transparent 60%),
+      radial-gradient(60% 50% at 25% 80%, rgba(124, 150, 115, 0.35) 0%, transparent 65%);
+    filter: blur(6px);
+  }
+
+  /* Soft vignette to frame the hero content. */
+  .hero-vignette {
+    background: radial-gradient(120% 100% at 50% 45%, transparent 40%, rgba(18, 24, 16, 0.55) 100%);
+  }
+
+  /* Film-grain overlay (feTurbulence data-URI). */
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
   }
 
   .leaf-pattern {
-    background-image: radial-gradient(circle at 20% 20%, rgba(74, 222, 128, 0.15) 0%, transparent 25%),
-      radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.12) 0%, transparent 30%);
-  }
-
-  .hero-bg {
-    background: linear-gradient(135deg, #14532d 0%, #166534 40%, #1c1917 100%);
+    background-image:
+      radial-gradient(circle at 18% 18%, rgba(124, 150, 115, 0.12) 0%, transparent 28%),
+      radial-gradient(circle at 82% 82%, rgba(54, 76, 48, 0.10) 0%, transparent 30%);
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Staggered fade-up + blur-in for hero elements on load. */
+  .reveal {
+    animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .reveal-1 { animation-delay: 0.05s; }
+  .reveal-2 { animation-delay: 0.2s; }
+  .reveal-3 { animation-delay: 0.35s; }
+  .reveal-4 { animation-delay: 0.5s; }
+  .reveal-5 { animation-delay: 0.65s; }
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(16px); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* Respect users who prefer reduced motion: disable all decorative motion. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .animate-drift-light,
+  .animate-float,
+  .animate-pulse-slow,
+  .animate-fade-up {
+    animation: none !important;
+  }
+  .card-hover:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: none !important;
+  }
+  * {
+    scroll-behavior: auto !important;
   }
 }

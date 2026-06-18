@@ -16,7 +16,7 @@ export function QRCode({ value, size = 200, className = '' }: QRCodeProps) {
 
   useEffect(() => {
     if (!value) return;
-    QR.toDataURL(value, { width: size, margin: 2, color: { dark: '#14532d', light: '#ffffff' } })
+    QR.toDataURL(value, { width: size, margin: 2, color: { dark: '#1e2b1c', light: '#ffffff' } })
       .then(setDataUrl)
       .catch((err) => {
         console.error('Failed to generate QR code', err);
@@ -29,7 +29,7 @@ export function QRCode({ value, size = 200, className = '' }: QRCodeProps) {
         className={`flex items-center justify-center rounded-2xl bg-white shadow-sm ${className}`}
         style={{ width: size, height: size }}
       >
-        <span className="text-xs text-stone-400">Loading QR...</span>
+        <span className="text-xs text-ink/40">Loading QR...</span>
       </div>
     );
   }

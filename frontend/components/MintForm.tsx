@@ -150,32 +150,32 @@ export function MintForm() {
   const needsApproval = !allowance || (mintPrice && allowance < mintPrice);
 
   return (
-    <div className="card border-eco-100">
-      <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-none border-2 border-eco-200 bg-eco-100 text-eco-700">
-          <Sprout size={22} strokeWidth={2.5} />
+    <div className="card">
+      <div className="mb-6 flex items-center gap-4">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-eco-700/25 bg-eco-100/60 text-eco-700">
+          <Sprout size={20} strokeWidth={1.75} />
         </div>
         <div>
-          <h2 className="text-2xl font-semibold text-stone-900">Mint a memorial</h2>
-          <p className="text-sm text-stone-500">Cost: {mintPrice ? '0.10 USDC' : 'loading...'}</p>
+          <h2 className="font-display text-2xl font-medium tracking-wide text-ink">Mint a memorial</h2>
+          <p className="text-sm text-ink/55">Cost: {mintPrice ? '0.10 USDC' : 'loading...'}</p>
         </div>
       </div>
 
       {!CONTRACT_ADDRESS_CONFIGURED && (
-        <div className="rounded-none border-2 border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-          <p className="font-semibold">Contract address not configured</p>
+        <div className="rounded-2xl border border-amber-300/60 bg-amber-50 p-4 text-sm text-amber-900">
+          <p className="font-medium">Contract address not configured</p>
           <p className="mt-1">
             Deploy the EcoMemory contract from your wallet, then set
-            <code className="mx-1 rounded bg-amber-100 px-1 font-mono">NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS</code>
+            <code className="mx-1 rounded bg-amber-100 px-1 font-mono text-xs">NEXT_PUBLIC_ECOMEMORY_CONTRACT_ADDRESS</code>
             in your environment and restart.
           </p>
         </div>
       )}
 
       {!isConnected && (
-        <div className="rounded-none border-2 border-stone-200 bg-stone-100 p-4 text-sm text-stone-600">
+        <div className="rounded-2xl border border-ink/10 bg-cream/70 p-4 text-sm text-ink/65">
           <div className="flex items-center gap-3">
-            <Wallet size={20} strokeWidth={2.5} className="text-stone-500" />
+            <Wallet size={20} strokeWidth={1.75} className="text-ink/40" />
             <p>Connect your wallet on ARC Testnet to create a memorial.</p>
           </div>
         </div>
@@ -185,7 +185,7 @@ export function MintForm() {
         <button
           onClick={() => switchChain({ chainId: ARC_TESTNET.id })}
           disabled={isSwitching}
-          className="w-full rounded-none border-2 border-red-200 bg-red-50 p-4 text-left text-sm font-semibold text-red-700 transition hover:bg-red-100 disabled:opacity-50"
+          className="w-full rounded-2xl border border-red-300/60 bg-red-50 p-4 text-left text-sm font-medium text-red-700 transition hover:bg-red-100 disabled:opacity-50"
         >
           {isSwitching ? 'Switching…' : `Switch wallet to ARC Testnet (chain ID ${ARC_TESTNET.id})`}
         </button>
@@ -193,43 +193,43 @@ export function MintForm() {
 
       <div className="mt-6 space-y-4">
         <div>
-          <label className="block text-sm font-medium text-stone-700">Name</label>
+          <label className="block text-xs uppercase tracking-widest2 text-ink/55">Name</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="input"
+            className="input mt-1.5"
             placeholder="Jane Doe"
           />
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-stone-700">Birth date</label>
-            <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className="input" />
+            <label className="block text-xs uppercase tracking-widest2 text-ink/55">Birth date</label>
+            <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className="input mt-1.5" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-stone-700">Death date</label>
-            <input type="date" value={deathDate} onChange={(e) => setDeathDate(e.target.value)} className="input" />
+            <label className="block text-xs uppercase tracking-widest2 text-ink/55">Death date</label>
+            <input type="date" value={deathDate} onChange={(e) => setDeathDate(e.target.value)} className="input mt-1.5" />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-stone-700">Message</label>
+          <label className="block text-xs uppercase tracking-widest2 text-ink/55">Message</label>
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             maxLength={512}
             rows={4}
-            className="input"
+            className="input mt-1.5"
             placeholder="A short message to remember them by..."
           />
-          <p className="mt-1 text-xs text-stone-500">{message.length}/512 characters</p>
+          <p className="mt-1 text-xs text-ink/45">{message.length}/512 characters</p>
         </div>
         <div>
           <div className="flex items-center justify-between">
-            <label className="block text-sm font-medium text-stone-700">Beneficiary address</label>
+            <label className="block text-xs uppercase tracking-widest2 text-ink/55">Beneficiary address</label>
             {address && (
               <button
                 onClick={() => setBeneficiary(address)}
-                className="text-xs text-eco-600 hover:text-eco-800"
+                className="text-xs text-eco-700 hover:text-eco-900"
               >
                 Use my address
               </button>
@@ -238,15 +238,15 @@ export function MintForm() {
           <input
             value={beneficiary}
             onChange={(e) => setBeneficiary(e.target.value)}
-            className="input"
+            className="input mt-1.5"
             placeholder="0x..."
           />
-          <p className="mt-1 text-xs text-stone-500">Donations to this memorial will be sent here.</p>
+          <p className="mt-1 text-xs text-ink/45">Donations to this memorial will be sent here.</p>
         </div>
 
-        {error && <p className="rounded-none border-2 border-red-100 bg-red-50 p-3 text-sm text-red-700">{error}</p>}
+        {error && <p className="rounded-2xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>}
         {success && (
-          <p className="rounded-none border-2 border-eco-100 bg-eco-50 p-3 text-sm text-eco-800">
+          <p className="rounded-2xl border border-eco-300/60 bg-eco-100/60 p-3 text-sm text-eco-800">
             Memorial minted successfully. Check the transaction toast in the corner.
           </p>
         )}
